@@ -11,8 +11,8 @@ pipeline
     environment
         {
             DOCKERHUB_CREDENTIALS=credentials('abhishekknwdocker_id')
-        }https://github.com/pulls
-
+        https://github.com/pulls
+    }
     stages 
     {
         stage('git') 
