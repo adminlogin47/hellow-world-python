@@ -1,7 +1,12 @@
-#This is a sample Image 
-FROM python:3.6
-MAINTAINER abhishek@gmail.com 
+# syntax=docker/dockerfile:1
 
-RUN apt-get update 
-CMD [“echo”,”Image created”]
+FROM python:3.8-slim-buster
 
+WORKDIR /app
+
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+
+COPY . .
+
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
