@@ -10,7 +10,7 @@ pipeline
         }
     environment
         {
-            DOCKERHUB_CREDENTIALS=credentials('pl-docker-hub')
+            DOCKERHUB_CREDENTIALS=credentials('abhishekknwdocker_id')
         }
 
     stages 
