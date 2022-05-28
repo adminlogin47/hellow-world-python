@@ -1,6 +1,17 @@
-pipeline {
-  agent any
-  tools {nodejs "node" }
+pipeline 
+{
+    agent
+        {
+            kubernetes 
+            {
+                defaultContainer 'jnlp'
+                yamlFile 'agentpod.yaml'
+            }
+        }
+    environment
+        {
+            DOCKERHUB_CREDENTIALS=credentials('abhishekknwdocker_id')
+    }
   stages {
     stage('Cloning Git') {
       steps {
