@@ -12,23 +12,95 @@ pipeline
         {
             DOCKERHUB_CREDENTIALS=credentials('abhishekknwdocker_id')
     }
-     stages {
-    stage('Cloning Git') {
-      steps {
-        git url: 'https://github.com/adminlogin47/hellow-world-python.git',
-            credentialsId: 'adminlogin'
-            git branch: 'main',
-      }
+    stages 
+    {
+        stage('git') 
+        {
+            steps 
+            {
+                echo '-----------------pulling code from source-------------------'
+                git branch: 'main', credentialsId: 'adminlogin', url: 'git@github.com:adminlogin47/hellow-world-python.git'
+            }
+        }
+   
+        stage('Build') 
+        {
+            steps 
+            {
+                container('docker')
+                {
+                    echo '----------------building image of source code---------'
+                    sh 'docker build -t abhishekknw/jenkins-python-47billion:v$BUILD_NUMBER .'
+                }
+            }
+        }
+        stage('Test') 
+        {
+           steps 
+            {
+                container('docker')
+                {
+                    echo '----------------Listing images--------'
+                    sh 'docker images'
+                }
+            }
+          }
+        stage('Login') 
+        {
+            steps
+            { 
+                container('docker')
+                {
+                    echo '---------------------Logging in Docker-Hub to push the builded image--------------------'
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $abhishekknwdocker_id --password-stdin'
+                }
+            }
+        }
+        stage('Push') 
+        {
+            steps  
+            {
+                container('docker')
+                {
+                    echo '--------------------------Image pushed to Docker-Hub successfully----------------'
+                    sh 'docker push abhishekknw/jenkins-python-47billion:v$BUILD_NUMBER'
+                }
+            }
+        }
+         stage('PullImage') 
+         {
+             steps
+             { 
+                container('docker')
+                 {
+                    sh 'docker pull abhishekknw/jenkins-python-47billion:v$BUILD_NUMBER'
+                    echo '-----------------image pullled successfully------------'
+                    sh 'docker run -d --name=python-test$BUILD_NUMBER -p 50$BUILD_NUMBER:5000 abhishekknw/jenkins-python-47billion:v$BUILD_NUMBER'
+                    echo '-------------container running successfully--------------------'
+                }
+             }
+          }
+        /*stage('kubectl')
+        {
+            steps
+            {
+                withKubeCredentials([credentialsId: 'kubectl-id', serverUrl: 'https://172.31.0.217:6443'])
+                {
+                    sh 'kubectl config view'
+                }
+            }
+        }*/
     }
-    stage('Build') {
-       steps {
-         sh 'npm install'
-       }
+    post
+    {
+      always
+        {
+        container('docker')
+            {
+                sh 'docker logout'
+                echo 'Logout Successfully'
+                echo '------------------Happy Ending-------------------'
+            }
+        }
     }
-    stage('Test') {
-      steps {
-        sh 'npm test'
-      }
-    }
-  }
 }
