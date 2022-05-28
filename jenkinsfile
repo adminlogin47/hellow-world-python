@@ -19,7 +19,7 @@ pipeline
             steps 
             {
                 echo '-----------------pulling code from source-------------------'
-                git branch: 'main', credentialsId: 'adminlogin', url: 'git@github.com:adminlogin47/hellow-world-python.git'
+                git branch: 'main', credentialsId: 'adminlogin', url: 'https://github.com/adminlogin47/hellow-world-python.git'
             }
         }
    
