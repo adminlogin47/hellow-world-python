@@ -14,14 +14,12 @@ pipeline
     }
     stages 
     {
-        stage('git') 
-        {
-            steps 
-            {
-                echo '-----------------pulling code from source-------------------'
-                git branch: 'main', credentialsId: 'adminlogin', url: 'git@github.com:adminlogin47/hellow-world-python.git'
-            }
-        }
+        stage('Cloning Github') {
+      steps {
+        git url: 'https://github.com/adminlogin47/hellow-world-python.git',
+            credentialsId: 'adminlogin'
+      }
+    }
    
         stage('Build') 
         {
