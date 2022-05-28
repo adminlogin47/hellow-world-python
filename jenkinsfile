@@ -18,7 +18,7 @@ pipeline
          git url: 'https://github.com/adminlogin47/hellow-world-python.git',
             credentialsId: 'adminlogin'
             git branch: 'main',   
-      }
+              }
     }
     stage('Build') {
        steps {
