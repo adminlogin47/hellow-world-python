@@ -76,6 +76,10 @@ pipeline
                     sh 'docker pull abhishekknw/jenkins-python-47billion:v$BUILD_NUMBER'
                     echo '-----------------image pullled successfully------------'
                     sh 'docker run -d --name=python-test$BUILD_NUMBER -p 50$BUILD_NUMBER:5000 abhishekknw/jenkins-python-47billion:v$BUILD_NUMBER'
+                    
+                    sh 'docker ps -a'
+                    sh 'docker images'
+                    
                     echo '-------------container running successfully--------------------'
                 }
              }
