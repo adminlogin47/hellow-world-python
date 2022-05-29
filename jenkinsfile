@@ -52,7 +52,7 @@ pipeline
                 container('docker')
                 {
                     echo '---------------------Logging in Docker-Hub to push the builded image--------------------'
-                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $abhishekknwdocker_id --password-stdin'
+                    sh 'echo $abhishekknwdocker_id_USR | docker login -u $abhishekknwdocker_id_PSW --password-stdin'
                 }
             }
         }
