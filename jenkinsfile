@@ -86,7 +86,7 @@ pipeline
                 }
              }
           }
-        /*stage('kubectl')
+        stage('kubectl')
         {
             steps
             {
@@ -95,7 +95,7 @@ pipeline
                     sh 'kubectl config view'
                 }
             }
-        }*/
+        }
     }
     post
     {
