@@ -90,10 +90,13 @@ pipeline
         {
             steps
             {
-               // withKubeCredentials([credentialsId: 'kubectl-id', serverUrl: 'https://172.31.0.217:6443'])
-                //{
-                    sh 'kubectl config view'
-                //}
+                container('kubectl')
+                {
+                    // withKubeCredentials([credentialsId: 'kubectl-id', serverUrl: 'https://172.31.0.217:6443'])
+                        //{
+                            sh 'kubectl config view'
+                        //}
+                }
             }
         }
     }
