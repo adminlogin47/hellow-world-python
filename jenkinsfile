@@ -79,6 +79,7 @@ pipeline
                     
                     sh 'docker ps -a'
                     sh 'docker images'
+                    sh 'hostname'
                     
                     echo '-------------container running successfully--------------------'
                 }
