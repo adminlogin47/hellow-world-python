@@ -79,7 +79,8 @@ pipeline
                     
                     sh 'docker ps -a'
                     sh 'docker images'
-                    sh 'hostname'
+                    sh 'cat /etc/os-release'
+                    sh 'ifconfig'
                     
                     echo '-------------container running successfully--------------------'
                 }
