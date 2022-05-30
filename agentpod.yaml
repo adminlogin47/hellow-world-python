@@ -23,6 +23,12 @@ spec:
       tty: true
 
       privileged: true
+      
+      volumeMounts:
+
+        - name: kubectl-storage
+
+          mountPath: /data
 
     - name: docker
 
