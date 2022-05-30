@@ -11,6 +11,18 @@ metadata:
 spec:
 
   containers:
+  
+    - name: kubectl
+
+      image: bitnami/kubectl
+
+      command:
+
+        - cat
+
+      tty: true
+
+      privileged: true
 
     - name: docker
 
