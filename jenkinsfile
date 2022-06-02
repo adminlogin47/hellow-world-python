@@ -92,7 +92,7 @@ pipeline
             {
                 container('kubectl')
                 {
-                     withKubeConfig([credentialsId: 'kubectl-id', serverUrl: 'https://172.31.0.217:6443'])
+                     withKubeConfig([credentialsId: 'kube_id', serverUrl: 'https://172.31.0.217:6443'])
                         {
                             sh 'kubectl version'
                         }
